@@ -1,0 +1,28 @@
+{
+    "build_systems":
+    [
+        {
+            "cmd":
+            ["python", "${project_path}/converter_test.py"],
+            "name": "Unit tests",
+            "working_dir": "${project_path}"
+        }
+    ],
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+    "settings":
+    {
+        "open_related_patterns":
+        [
+            [
+                "*_test.py",
+                "*.py"
+            ]
+        ],
+        "tab_size": 4
+    }
+}

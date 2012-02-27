@@ -1,0 +1,9 @@
+{
+    "open_related_patterns":
+    [
+      ["*/src/*.js", "*/test/*Spec.js"],
+      ["*/src/*.js", "*/test/*Test.js"],
+      ["*/lib/*.js", "*/test/*Spec.js"],
+      ["*/lib/*.js", "*/test/*Test.js"]
+    ]
+}
