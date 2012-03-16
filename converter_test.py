@@ -1,5 +1,5 @@
 import unittest
-from converter import Converter
+from converter import *
 
 
 class ConverterTest(unittest.TestCase):
@@ -25,6 +25,16 @@ class ConverterTest(unittest.TestCase):
         c = Converter("*/test/unit/*.spec.coffee", "*/lib/*.js")
         self.assertEqual(c.convert("/some/test/unit/aaa/b.spec.coffee"), "/some/lib/aaa/b.js")
         self.assertEqual(c.convert("/other/lib/abc.js"), "/other/test/unit/abc.spec.coffee")
+
+
+class WindowsConverterTest(unittest.TestCase):
+
+    def test_windows_path(self):
+        # should handle backslash
+        c = WindowsConverter("*/functions/*.pm", "*/standard/css/*.css")
+        self.assertEquals(c.convert("C:\\Users\\functions\\admin_open.pm"), \
+            "C:\\Users\\standard\\css\\admin_open.css")
+
 
 if __name__ == '__main__':
     unittest.main()

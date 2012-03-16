@@ -1,6 +1,6 @@
 import sublime, sublime_plugin
 import os.path
-from converter import Converter
+import converter
 
 class OpenRelatedCommand(sublime_plugin.WindowCommand):
     def run(self):
@@ -9,7 +9,7 @@ class OpenRelatedCommand(sublime_plugin.WindowCommand):
         current_file = view.file_name()
 
         for pattern in view.settings().get('open_related_patterns', []):
-            file = Converter(pattern[0], pattern[1]).convert(current_file)
+            file = converter.create(pattern[0], pattern[1], sublime.platform()).convert(current_file)
             if file and os.path.exists(file):
                 if win.num_groups() > 1:
                     win.focus_group((win.active_group() + 1) % win.num_groups())

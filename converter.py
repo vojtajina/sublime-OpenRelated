@@ -1,13 +1,13 @@
 import re
 
 
-class Converter():
+class Converter(object):
     def __init__(self, from_exp, to_exp):
-        self.from_re = [re.compile(from_exp.replace("*", "(.*)"))]
+        self.from_re = [self._pattern_to_re(from_exp)]
         self.to_exp = []
 
         if self._is_formatter(to_exp):
-            self.from_re.append(re.compile(to_exp.replace("*", "(.*)")))
+            self.from_re.append(self._pattern_to_re(to_exp))
             self.to_exp.append(self._pattern_to_formatter(to_exp))
             self.to_exp.append(self._pattern_to_formatter(from_exp))
         else:
@@ -22,6 +22,9 @@ class Converter():
 
         return None
 
+    def _pattern_to_re(self, pattern):
+        return re.compile(re.escape(pattern).replace("\\*", "(.*)"))
+
     def _pattern_to_formatter(self, pattern):
         counter = [-1]
         def increment(m):
@@ -32,3 +35,16 @@ class Converter():
 
     def _is_formatter(self, exp):
         return exp.find("*") != -1
+
+
+class WindowsConverter(Converter):
+    def __init__(self, from_exp, to_exp):
+        super(WindowsConverter, self).__init__(self._normalize(from_exp), self._normalize(to_exp))
+
+    def _normalize(self, path):
+        return path.replace("/", "\\")
+
+
+def create(from_exp, to_exp, platform):
+    if platform is "windows": return WindowsConverter(from_exp, to_exp)
+    else:   return Converter(from_exp, to_exp)
