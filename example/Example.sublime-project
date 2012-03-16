@@ -1,0 +1,14 @@
+{
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+    "settings":
+    {
+        "open_related_patterns": [
+          ["*/css/*.css", "*/js/*.js", "*/test/unit/*.coffee"]
+        ]
+    }
+}
