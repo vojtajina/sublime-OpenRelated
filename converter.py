@@ -2,25 +2,30 @@ import re
 
 
 class Converter(object):
-    def __init__(self, from_exp, to_exp):
-        self.from_re = [self._pattern_to_re(from_exp)]
+    def __init__(self, patterns):
+        self.from_re = []
         self.to_exp = []
 
-        if self._is_formatter(to_exp):
-            self.from_re.append(self._pattern_to_re(to_exp))
-            self.to_exp.append(self._pattern_to_formatter(to_exp))
-            self.to_exp.append(self._pattern_to_formatter(from_exp))
-        else:
-            self.to_exp.append(to_exp)
+        for pattern in patterns:
+            self.from_re.append(self._pattern_to_re(pattern))
+            self.to_exp.append(self._pattern_to_formatter(pattern))
 
     def convert(self, path):
-        idx = 0
-        while idx < len(self.from_re):
-            match = self.from_re[idx].match(path)
-            if match: return self.to_exp[idx].format(*match.groups())
-            idx += 1
+        results = []
+        lenght = len(self.from_re)
 
-        return None
+        for i in range(lenght):
+            match = self.from_re[i].match(path)
+            if not match: continue
+
+            j = (i + 1) % lenght
+            while (j is not i):
+                results.append(self.to_exp[j].format(*match.groups()))
+                j = (j + 1) % lenght
+
+            break
+
+        return results
 
     def _pattern_to_re(self, pattern):
         return re.compile(re.escape(pattern).replace("\\*", "(.*)"))
@@ -38,13 +43,13 @@ class Converter(object):
 
 
 class WindowsConverter(Converter):
-    def __init__(self, from_exp, to_exp):
-        super(WindowsConverter, self).__init__(self._normalize(from_exp), self._normalize(to_exp))
+    def __init__(self, patterns):
+        super(WindowsConverter, self).__init__(map(self._normalize, patterns))
 
     def _normalize(self, path):
         return path.replace("/", "\\")
 
 
-def create(from_exp, to_exp, platform):
-    if platform is "windows": return WindowsConverter(from_exp, to_exp)
-    else:   return Converter(from_exp, to_exp)
+def create(patterns, platform):
+    if platform is "windows": return WindowsConverter(patterns)
+    else:   return Converter(patterns)
