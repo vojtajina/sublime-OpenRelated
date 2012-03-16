@@ -10,15 +10,16 @@ Or you can download the [tarball] and extract it to your `~/Library/Application 
 ## Configuration
 Check out the default configuration: https://github.com/vojtajina/sublime-OpenRelated/blob/master/Preferences.sublime-settings
 
+Check out example project: https://github.com/vojtajina/sublime-OpenRelated/blob/master/example
+
 You can override this configuration per project :-D
 
 ````
-["*/test/*spec.js", "*/lib/*.js]
+["*/test/*spec.js", "*/lib/*.js", "/abc/d/*.py"]
 ````
-This pattern maps both directions:
 
-- when editting `/some/test/a.spec.js` file, it will open (if file exists) `/some/lib/a.js`
-- when editting `/other/lib/b.js`, it will open `/other/test/b.spec.js`
+- when editting `/some/test/a.spec.js` file, it will open (if file exists) `/some/lib/a.js` as well as `/some/abc/d/a.py`
+- when editting `/other/lib/b.js`, it will open `/other/abc/d/b.py` and `/other/test/b.spec.js`
 
 ## Defining key shortcut
 By default, "open_related" is mapped to `CMD+T`, however you can easily change that, just add to your keymap preferences:
