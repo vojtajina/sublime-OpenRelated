@@ -21,6 +21,11 @@ You can override this configuration per project :-D
 - when editting `/some/test/a.spec.js` file, it will open (if file exists) `/some/lib/a.js` as well as `/some/abc/d/a.py`
 - when editting `/other/lib/b.js`, it will open `/other/abc/d/b.py` and `/other/test/b.spec.js`
 
+### Use back slashes on Windows
+````
+["*\\tpl\\*.html", "*\\js\\*.js"]
+````
+
 ## Defining key shortcut
 By default, "open_related" is mapped to `CMD+T`, however you can easily change that, just add to your keymap preferences:
 
