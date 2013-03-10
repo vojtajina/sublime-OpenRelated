@@ -1,6 +1,6 @@
 import sublime, sublime_plugin
 import os.path
-import converter
+from . import converter
 
 class OpenRelatedCommand(sublime_plugin.WindowCommand):
     def run(self):

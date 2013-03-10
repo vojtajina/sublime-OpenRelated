@@ -44,7 +44,7 @@ class Converter(object):
 
 class WindowsConverter(Converter):
     def __init__(self, patterns):
-        super(WindowsConverter, self).__init__(map(self._normalize, patterns))
+        super(WindowsConverter, self).__init__(list(map(self._normalize, patterns)))
 
     def _normalize(self, path):
         return path.replace("/", "\\")
