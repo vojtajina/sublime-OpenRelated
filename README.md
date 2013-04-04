@@ -1,6 +1,6 @@
-# OpenRelated (Sublime Text 2 plugin)
+# OpenRelated (Sublime Text 2/3 plugin)
 
-A plugin for quick navigation between related files (e.g. test/implementation) in awesome text editor - [Sublime Text 2].
+A plugin for quick navigation between related files (e.g. test/implementation) in awesome text editor - [Sublime Text].
 
 ## Instalation
 Recommended way is using [PackageControll] package.
@@ -36,6 +36,6 @@ By default, "open_related" is mapped to `CMD+T`, however you can easily change t
 Note, if you have multiple groups opened (split view), related file will be opened in next group.
 
 
-[Sublime Text 2]: http://www.sublimetext.com/
+[Sublime Text]: http://www.sublimetext.com/
 [PackageControll]: http://wbond.net/sublime_packages/package_control/installation
 [tarball]: https://github.com/vojtajina/sublime-OpenRelated/tarball/master
